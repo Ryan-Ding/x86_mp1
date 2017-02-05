@@ -125,6 +125,8 @@ tasklet_end:
         leave
 	ret
 
+
+
 mp1_ioctl:
         movl 8(%esp), %edx
         cmpl $3, %edx
@@ -135,7 +137,6 @@ mp1_ioctl:
 
 error_cmd:
         movl $-1, %eax 
-        leave
 	ret
 
 jump_table:
@@ -177,6 +178,7 @@ mp1_ioctl_add:
         popl %edx
         popl %ebx
 
+        xorl %edi, %edi
         movw LOCATION(%eax), %di
         cmpl $2000, %edi
         jae stop_add
@@ -210,7 +212,7 @@ mp1_ioctl_add:
         movl $0, %eax
         popl %edi
         popl %esi
-        popl %edx
+        popl %ebx
         leave
         ret
 
@@ -229,7 +231,7 @@ add_done:
         movl $-1, %eax
         popl %edi
         popl %esi
-        popl %edx
+        popl %ebx
         leave
         ret
         
@@ -304,6 +306,8 @@ mp1_ioctl_remove:
         leave
         ret
         
+
+
 mp1_ioctl_find:
         pushl %ebp
         movl %esp,%ebp
